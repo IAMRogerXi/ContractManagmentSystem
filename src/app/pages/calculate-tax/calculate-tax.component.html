@@ -1,0 +1,317 @@
+<form class="form" #calculateTaxForm="ngForm" (ngSubmit)="onformSubmit();">
+  <h4 class="content-section-header">税金计算 Tax Calculation</h4>
+  <ul class="list-group borderless">
+    <li class="list-group-item content-section">
+      <div class="content-section-row">
+        <div class="content-section-left-column">
+          <mat-form-field>
+            <mat-select placeholder="合同金额是否含税" [(ngModel)]="request.colIncludeTax" id="colIncludeTax" name="colIncludeTax"
+              #colIncludeTax="ngModel" required>
+              <mat-option value="是">是</mat-option>
+              <mat-option value="否">否</mat-option>
+            </mat-select>
+            <mat-hint>Contract Amount Including Tax or not</mat-hint>
+            <mat-error *ngIf="colIncludeTax.hasError('required')">
+              required when approving the payment request.
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="content-section-right-column">
+          <mat-form-field>
+            <input matInput placeholder="汇率" [(ngModel)]="request.colExchangeRate" id="colExchangeRate" name="colExchangeRate"
+              #colExchangeRate="ngModel" required>
+            <mat-hint>Exchange Rate</mat-hint>
+            <mat-error *ngIf="colExchangeRate.hasError('required')">
+              required when approving the payment request.
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="content-section-row">
+        <div class="content-section-left-column">
+          <mat-form-field>
+            <input matInput placeholder="应税收入" [(ngModel)]="request.colTaxableIncoming" id="colTaxableIncoming" name="colTaxableIncoming"
+              #colTaxableIncoming="ngModel" (change)="calculateTax()" required>
+            <mat-hint>Taxable Income</mat-hint>
+            <mat-error *ngIf="colTaxableIncoming.hasError('required')">
+              required when approving the payment request.
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="content-section-right-column">
+          <mat-form-field>
+            <mat-select placeholder="利润率" (selectionChange)="calculateTax()" [(ngModel)]="request.colProfitMargin" id="colProfitMargin"
+              name="colProfitMargin" #colProfitMargin="ngModel" required>
+              <mat-option *ngFor="let item of metadataProfitMargin" value={{item.colProfitMargin}}>
+                {{item.colProfitMargin}} %
+              </mat-option>
+            </mat-select>
+            <mat-hint>Profit Margin</mat-hint>
+            <mat-error *ngIf="colProfitMargin.hasError('required')">
+              required when approving the payment request.
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="content-section-row">
+        <div class="content-section-left-column">
+          <mat-form-field>
+            <input matInput placeholder="所得税" [(ngModel)]="request.colIncomeTax" id="colIncomeTax" name="colIncomeTax"
+              #colIncomeTax="ngModel" required>
+            <mat-hint>Corporate Income Tax</mat-hint>
+            <mat-error *ngIf="colIncomeTax.hasError('required')">
+              required when approving the payment request.
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="content-section-right-column">
+          <mat-form-field>
+            <input matInput placeholder="增值税" [(ngModel)]="request.colValueAddedTax" id="colValueAddedTax" name="colValueAddedTax"
+              #colValueAddedTax="ngModel" required>
+            <mat-hint>Value Added Tax</mat-hint>
+            <mat-error *ngIf="colValueAddedTax.hasError('required')">
+              required when approving the payment request.
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="content-section-row">
+        <div class="content-section-left-column">
+          <mat-form-field>
+            <input matInput placeholder="城市建设税" [(ngModel)]="request.colCityPlanningTax" id="colCityPlanningTax" name="colCityPlanningTax"
+              #colCityPlanningTax="ngModel" required>
+            <mat-hint>City Construction Tax</mat-hint>
+            <mat-error *ngIf="colCityPlanningTax.hasError('required')">
+              required when approving the payment request.
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="content-section-right-column">
+          <mat-form-field>
+            <input matInput placeholder="教育费附加" [(ngModel)]="request.colEducationFund" id="colEducationFund" name="colEducationFund"
+              #colEducationFund="ngModel" required>
+            <mat-hint>Education Supplementary Fee</mat-hint>
+            <mat-error *ngIf="colEducationFund.hasError('required')">
+              required when approving the payment request.
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="content-section-row">
+        <div class="content-section-left-column">
+          <mat-form-field>
+            <input matInput placeholder="地方教育费附加" [(ngModel)]="request.colLocalEducationFund" id="colLocalEducationFund"
+              name="colLocalEducationFund" #colLocalEducationFund="ngModel" required>
+            <mat-hint>Local Education Supplementary Fee</mat-hint>
+            <mat-error *ngIf="colLocalEducationFund.hasError('required')">
+              required when approving the payment request.
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="content-section-right-column">
+          <mat-form-field>
+            <input matInput placeholder="河道管理费/水利基金" [(ngModel)]="request.colWaterConstructionFunds" id="colWaterConstructionFunds"
+              name="colWaterConstructionFunds" #colWaterConstructionFunds="ngModel" required>
+            <mat-hint>River Management Fee/Water Resources Fund</mat-hint>
+            <mat-error *ngIf="colWaterConstructionFunds.hasError('required')">
+              required when approving the payment request.
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+    </li>
+  </ul>
+  <h4 class="content-section-header">其他税种 Additional Tax</h4>
+  <ul class="list-group borderless">
+    <li class="list-group-item content-section">
+      <div class="content-section-row">
+        <div style="display: inline-block; width: 30%;">
+          <mat-form-field>
+            <mat-select placeholder="其他税种1" [(ngModel)]="request.colOtherTaxName1" id="colOtherTaxName1" name="colOtherTaxName1"
+              #colOtherTaxName1="ngModel">
+              <mat-option *ngFor="let item of metadataOtherTaxCategory" value={{item.colOtherTaxCategory}}>
+                {{item.colOtherTaxCategory}}
+              </mat-option>
+            </mat-select>
+            <mat-hint>Tax Category</mat-hint>
+          </mat-form-field>
+        </div>
+        <div style="display: inline-block; width: 30%;">
+          <mat-form-field>
+            <input matInput placeholder="税率" [(ngModel)]="request.colOtherTaxRate1" id="colOtherTaxRate1" name="colOtherTaxRate1"
+              #colOtherTaxRate1="ngModel">
+            <mat-hint>Tax Rate</mat-hint>
+          </mat-form-field>
+        </div>
+        <div style="display: inline-block; width: 30%;">
+          <mat-form-field>
+            <input matInput placeholder="税金" [(ngModel)]="request.colOtherTax1" id="colOtherTax1" name="colOtherTax1"
+              #colOtherTax1="ngModel">
+            <mat-hint>Tax</mat-hint>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="content-section-row">
+        <div style="display: inline-block; width: 30%;">
+          <mat-form-field>
+            <mat-select placeholder="其他税种2" [(ngModel)]="request.colOtherTaxName2" id="colOtherTaxName2" name="colOtherTaxName2"
+              #colOtherTaxName2="ngModel">
+              <mat-option *ngFor="let item of metadataOtherTaxCategory" value={{item.colOtherTaxCategory}}>
+                {{item.colOtherTaxCategory}}
+              </mat-option>
+            </mat-select>
+            <mat-hint>Tax Category</mat-hint>
+          </mat-form-field>
+        </div>
+        <div style="display: inline-block; width: 30%;">
+          <mat-form-field>
+            <input matInput placeholder="税率" [(ngModel)]="request.colOtherTaxRate2" id="colOtherTaxRate2" name="colOtherTaxRate2"
+              #colOtherTaxRate2="ngModel">
+            <mat-hint>Tax Rate</mat-hint>
+          </mat-form-field>
+        </div>
+        <div style="display: inline-block; width: 30%;">
+          <mat-form-field>
+            <input matInput placeholder="税金" [(ngModel)]="request.colOtherTax2" id="colOtherTax2" name="colOtherTax2"
+              #colOtherTax2="ngModel">
+            <mat-hint>Tax</mat-hint>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="content-section-row">
+        <div style="display: inline-block; width: 30%;">
+          <mat-form-field>
+            <mat-select placeholder="其他税种3" [(ngModel)]="request.colOtherTaxName3" id="colOtherTaxName3" name="colOtherTaxName3"
+              #colOtherTaxName3="ngModel">
+              <mat-option *ngFor="let item of metadataOtherTaxCategory" value={{item.colOtherTaxCategory}}>
+                {{item.colOtherTaxCategory}}
+              </mat-option>
+            </mat-select>
+            <mat-hint>Tax Category</mat-hint>
+          </mat-form-field>
+        </div>
+        <div style="display: inline-block; width: 30%;">
+          <mat-form-field>
+            <input matInput placeholder="税率" [(ngModel)]="request.colOtherTaxRate3" id="colOtherTaxRate3" name="colOtherTaxRate3"
+              #colOtherTaxRate3="ngModel">
+            <mat-hint>Tax Rate</mat-hint>
+          </mat-form-field>
+        </div>
+        <div style="display: inline-block; width: 30%;">
+          <mat-form-field>
+            <input matInput placeholder="税金" [(ngModel)]="request.colOtherTax3" id="colOtherTax3" name="colOtherTax3"
+              #colOtherTax3="ngModel">
+            <mat-hint>Tax</mat-hint>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="content-section-row">
+        <div style="display: inline-block; width: 30%;">
+          <mat-form-field>
+            <mat-select placeholder="其他税种4" [(ngModel)]="request.colOtherTaxName4" id="colOtherTaxName4" name="colOtherTaxName4"
+              #colOtherTaxName4="ngModel">
+              <mat-option *ngFor="let item of metadataOtherTaxCategory" value={{item.colOtherTaxCategory}}>
+                {{item.colOtherTaxCategory}}
+              </mat-option>
+            </mat-select>
+            <mat-hint>Tax Category</mat-hint>
+          </mat-form-field>
+        </div>
+        <div style="display: inline-block; width: 30%;">
+          <mat-form-field>
+            <input matInput placeholder="税率" [(ngModel)]="request.colOtherTaxRate4" id="colOtherTaxRate4" name="colOtherTaxRate4"
+              #colOtherTaxRate4="ngModel">
+            <mat-hint>Tax Rate</mat-hint>
+          </mat-form-field>
+        </div>
+        <div style="display: inline-block; width: 30%;">
+          <mat-form-field>
+            <input matInput placeholder="税金" [(ngModel)]="request.colOtherTax4" id="colOtherTax4" name="colOtherTax4"
+              #colOtherTax4="ngModel">
+            <mat-hint>Tax</mat-hint>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="content-section-row">
+        <div style="display: inline-block; width: 30%;">
+          <mat-form-field>
+            <mat-select placeholder="其他税种5" [(ngModel)]="request.colOtherTaxName5" id="colOtherTaxName5" name="colOtherTaxName5"
+              #colOtherTaxName5="ngModel">
+              <mat-option *ngFor="let item of metadataOtherTaxCategory" value={{item.colOtherTaxCategory}}>
+                {{item.colOtherTaxCategory}}
+              </mat-option>
+            </mat-select>
+            <mat-hint>Tax Category</mat-hint>
+          </mat-form-field>
+        </div>
+        <div style="display: inline-block; width: 30%;">
+          <mat-form-field>
+            <input matInput placeholder="税率" [(ngModel)]="request.colOtherTaxRate5" id="colOtherTaxRate5" name="colOtherTaxRate5"
+              #colOtherTaxRate5="ngModel">
+            <mat-hint>Tax Rate</mat-hint>
+          </mat-form-field>
+        </div>
+        <div style="display: inline-block; width: 30%;">
+          <mat-form-field>
+            <input matInput placeholder="税金" [(ngModel)]="request.colOtherTax5" id="colOtherTax5" name="colOtherTax5"
+              #colOtherTax5="ngModel">
+            <mat-hint>Tax</mat-hint>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="content-section-row">
+        <div style="display: inline-block; width: 30%;">
+          <mat-form-field>
+            <mat-select placeholder="其他税种6" [(ngModel)]="request.colOtherTaxName6" id="colOtherTaxName6" name="colOtherTaxName6"
+              #colOtherTaxName6="ngModel">
+              <mat-option *ngFor="let item of metadataOtherTaxCategory" value={{item.colOtherTaxCategory}}>
+                {{item.colOtherTaxCategory}}
+              </mat-option>
+            </mat-select>
+            <mat-hint>Tax Category</mat-hint>
+          </mat-form-field>
+        </div>
+        <div style="display: inline-block; width: 30%;">
+          <mat-form-field>
+            <input matInput placeholder="税率" [(ngModel)]="request.colOtherTaxRate6" id="colOtherTaxRate6" name="colOtherTaxRate6"
+              #colOtherTaxRate6="ngModel">
+            <mat-hint>Tax Rate</mat-hint>
+          </mat-form-field>
+        </div>
+        <div style="display: inline-block; width: 30%;">
+          <mat-form-field>
+            <input matInput placeholder="税金" [(ngModel)]="request.colOtherTax6" id="colOtherTax6" name="colOtherTax6"
+              #colOtherTax6="ngModel">
+            <mat-hint>Tax</mat-hint>
+          </mat-form-field>
+        </div>
+      </div>
+    </li>
+  </ul>
+  <ul class="list-group borderless">
+    <li class="list-group-item content-section">
+      <div class="content-section-textarea-row">
+        <mat-form-field class="textarea">
+          <textarea matInput placeholder="审批备注" [(ngModel)]="siteTaxTeamComment" [formControl]="txtSiteTaxTeamComment"
+            id="siteTaxTeamComment" name="siteTaxTeamComment"></textarea>
+          <mat-hint>Review Comment</mat-hint>
+          <mat-error *ngIf="txtSiteTaxTeamComment.invalid">
+            Required when rejecting the payment request.
+          </mat-error>
+        </mat-form-field>
+      </div>
+    </li>
+  </ul>
+  <div class="button-section">
+    <div class="button-block">
+      <button type="submit">Approve</button>
+      <!-- <button type="submit" [disabled]="!calculateTaxForm.valid">Approve</button> -->
+    </div>
+    <div class="button-block">
+      <button (click)="onbtnRejectClick(calculateTaxForm)" type="button">Reject</button>
+    </div>
+    <div class="button-block">
+      <button (click)="onbtnCloseClick()" type="button">Close</button>
+    </div>
+  </div>
+</form>

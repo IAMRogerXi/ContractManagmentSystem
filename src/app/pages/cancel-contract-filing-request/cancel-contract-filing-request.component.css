@@ -1,0 +1,8 @@
+.button-section {
+    text-align: center;    
+}
+
+.button-block {
+    display: inline-block; 
+    width: 30%;
+}

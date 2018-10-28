@@ -1,0 +1,37 @@
+<div class="form">
+  <ul class="list-group borderless">
+    <li class="list-group-item content-section">
+      <div class="content-section-row">
+        <mat-form-field>
+          <input matInput placeholder="合同备案号" [(ngModel)]="contractFilingID" [formControl]="txtContractFilingID" id="contractFilingID"
+            name="contractFilingID">
+          <mat-hint>Contract Record Number</mat-hint>
+          <mat-error *ngIf="txtContractFilingID.invalid">
+            Required when approving the contract filing request.
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div class="content-section-textarea-row">
+        <mat-form-field class="textarea">
+          <textarea matInput placeholder="审批备注" [(ngModel)]="siteTaxTeamComment" [formControl]="txtSiteTaxTeamComment" id="siteTaxTeamComment"
+            name="siteTaxTeamComment"></textarea>
+          <mat-hint>Review Comment</mat-hint>
+          <mat-error *ngIf="txtSiteTaxTeamComment.invalid">
+            Required when rejecting the contract filing request.
+          </mat-error>
+        </mat-form-field>
+      </div>
+    </li>
+  </ul>
+  <div class="button-section">
+    <div class="button-block">
+      <button (click)="onbtnApproveClick()" type="button">Approve</button>
+    </div>
+    <div class="button-block">
+      <button (click)="onbtnRejectClick()" type="button">Reject</button>
+    </div>
+    <div class="button-block">
+      <button (click)="onbtnCloseClick()" type="button">Close</button>
+    </div>
+  </div>
+</div>

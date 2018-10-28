@@ -1,0 +1,378 @@
+<div class="form">
+  <h4 class="content-section-header">合同备案情况 Contract Filing</h4>
+  <ul class="list-group borderless">
+    <li class="list-group-item content-section">
+      <div class="content-section-row">
+        <div class="content-section-left-column">
+          <mat-form-field>
+            <input matInput placeholder="合同编号" [ngModel]="request.colContractID" [readonly]="true">
+            <mat-hint>Contract Number</mat-hint>
+          </mat-form-field>
+        </div>
+        <div class="content-section-right-column" *ngIf="request.colContractFilingID != null && request.colContractFilingID != ''">
+          <mat-form-field>
+            <input matInput placeholder="合同备案号" [ngModel]="request.colContractFilingID" [readonly]="true">
+            <mat-hint>Contract Record Number</mat-hint>
+          </mat-form-field>
+        </div>
+      </div>
+    </li>
+  </ul>
+  <h4 class="content-section-header">发包方或劳务受让方情况 Contractor or Labor Assignee</h4>
+  <ul class="list-group borderless">
+    <li class="list-group-item content-section">
+      <div class="content-section-row">
+        <div class="content-section-left-column">
+          <mat-form-field>
+            <input matInput placeholder="公司代码" [ngModel]="request.colCompanyCode" [readonly]="true">
+            <mat-hint>Company Code</mat-hint>
+          </mat-form-field>
+        </div>
+        <div class="content-section-right-column">
+          <mat-form-field style="width:280px !important">
+            <input matInput placeholder="公司名称" [ngModel]="request.colCompanyName" [readonly]="true">
+            <mat-hint>Company Name</mat-hint>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="content-section-row">
+        <div class="content-section-left-column">
+          <mat-form-field>
+            <input matInput placeholder="联系人" [ngModel]="request.colContact" [readonly]="true">
+            <mat-hint>The Contact</mat-hint>
+          </mat-form-field>
+        </div>
+        <div class="content-section-right-column">
+          <mat-form-field>
+            <input matInput placeholder="电话" [ngModel]="request.colPhone" [readonly]="true">
+            <mat-hint>Contact Number</mat-hint>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="content-section-row">
+        <div class="content-section-left-column">
+          <mat-form-field>
+            <input matInput placeholder="传真" [ngModel]="request.colFax" [readonly]="true">
+            <mat-hint>Fax</mat-hint>
+          </mat-form-field>
+        </div>
+      </div>
+    </li>
+  </ul>
+  <h4 class="content-section-header">承包商或提供劳务方("非居民")情况 Contractor or Labor Provider "Non-Residents"</h4>
+  <ul class="list-group borderless">
+    <li class="list-group-item content-section">
+      <div class="content-section-row">
+        <div class="content-section-left-column">
+          <mat-form-field>
+            <input matInput placeholder="是否已经组织临时登记" [ngModel]="request.colVendorRegistryStatus" [readonly]="true">
+            <mat-hint>Have Temporary Registration or not</mat-hint>
+          </mat-form-field>
+        </div>
+        <div class="content-section-right-column" *ngIf="request.colVendorRegistryStatus == '是'">
+          <mat-form-field>
+            <input matInput placeholder="纳税人识别号" [ngModel]="request.colVendorTaxPayerID" [readonly]="true">
+            <mat-hint>Taxpayer's Identification Number</mat-hint>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="content-section-row">
+        <div class="content-section-left-column">
+          <mat-form-field>
+            <input matInput placeholder="名称(英文)" [ngModel]="request.colVendorTaxPayerNameEN" [readonly]="true">
+            <mat-hint>Company Name (In English)</mat-hint>
+          </mat-form-field>
+        </div>
+        <div class="content-section-right-column">
+          <mat-form-field>
+            <input matInput placeholder="名称(中文)" [ngModel]="request.colVendorTaxPayerNameCN" [readonly]="true">
+            <mat-hint>Company Name (In Chinese)</mat-hint>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="content-section-row">
+        <mat-form-field>
+          <input matInput placeholder="非居民企业国家" [ngModel]="request.colVendorCompanyNationality" [readonly]="true">
+          <mat-hint>Non-resident Enterprise Country</mat-hint>
+        </mat-form-field>
+      </div>
+      <div class="content-section-row">
+        <div class="content-section-left-column">
+          <mat-form-field>
+            <input matInput placeholder="地址(英文)" [ngModel]="request.colVendorCompanyAddressEN" [readonly]="true">
+            <mat-hint>Company Address (In English)</mat-hint>
+          </mat-form-field>
+        </div>
+        <div class="content-section-right-column">
+          <mat-form-field>
+            <input matInput placeholder="地址(中文)" [ngModel]="request.colVendorCompanyAddressCN" [readonly]="true">
+            <mat-hint>Company Address (In Chinese)</mat-hint>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="content-section-row">
+        <div class="content-section-left-column">
+          <mat-form-field>
+            <input matInput placeholder="开户银行名称" [ngModel]="request.colVendorBankName" [readonly]="true">
+            <mat-hint>Bank of Deposit</mat-hint>
+          </mat-form-field>
+        </div>
+        <div class="content-section-right-column">
+          <mat-form-field>
+            <input matInput placeholder="账号" [ngModel]="request.colVendorBankAccount" [readonly]="true">
+            <mat-hint>Bank Account</mat-hint>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="content-section-row">
+        <div class="content-section-left-column">
+          <mat-form-field>
+            <input matInput placeholder="联系人 (注: 可以是申请人)" [ngModel]="request.colVendorContact" [readonly]="true">
+            <mat-hint>The Contact (Note: Could be theApplicant)</mat-hint>
+          </mat-form-field>
+        </div>
+        <div class="content-section-right-column">
+          <mat-form-field>
+            <input matInput placeholder="电话" [ngModel]="request.colVendorPhone" [readonly]="true">
+            <mat-hint>Contact Number</mat-hint>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="content-section-row">
+        <mat-form-field>
+          <input matInput placeholder="传真" [ngModel]="request.colVendorFax" [readonly]="true">
+          <mat-hint>Fax</mat-hint>
+        </mat-form-field>
+      </div>
+      <div class="content-section-row">
+        <div class="content-section-left-column">
+          <mat-form-field>
+            <input matInput placeholder="纳税人名称" [ngModel]="request.colVendorTaxPayerName" [readonly]="true">
+            <mat-hint>Name of Taxpayer</mat-hint>
+          </mat-form-field>
+        </div>
+        <div class="content-section-right-column">
+          <mat-form-field>
+            <input matInput placeholder="法定代表人" [ngModel]="request.colVendorCompanyOwnerName" [readonly]="true">
+            <mat-hint>Legal Representative</mat-hint>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="content-section-row">
+        <div class="content-section-left-column">
+          <mat-form-field>
+            <input matInput placeholder="国籍 (注: 法定代表人)" [ngModel]="request.colVendorCompanyOwnerNationality" [readonly]="true">
+            <mat-hint>Nationality (Note: Legal Representative)</mat-hint>
+          </mat-form-field>
+        </div>
+        <div class="content-section-right-column">
+          <mat-form-field>
+            <input matInput placeholder="财务负责人" [ngModel]="request.colVendorCompanyCFO" [readonly]="true">
+            <mat-hint>Finance Chief</mat-hint>
+          </mat-form-field>
+        </div>
+      </div>
+    </li>
+  </ul>
+  <h4 class="content-section-header">合同情况 Contract</h4>
+  <ul class="list-group borderless">
+    <li class="list-group-item content-section">
+      <div class="content-section-row">
+        <mat-form-field>
+          <input matInput placeholder="项目名称" [ngModel]="request.colProjectName" [readonly]="true">
+          <mat-hint>Project Name</mat-hint>
+        </mat-form-field>
+      </div>
+      <div class="checkbox form-font-color">
+        <h5>项目类型</h5>
+        <section>
+          <mat-checkbox>承包工程</mat-checkbox>
+          <mat-checkbox>修理修配</mat-checkbox>
+          <mat-checkbox>交通运输</mat-checkbox>
+          <mat-checkbox>仓储租赁</mat-checkbox>
+          <mat-checkbox>咨询经纪</mat-checkbox>
+          <mat-checkbox>文化体育</mat-checkbox>
+          <mat-checkbox>技术服务</mat-checkbox>
+          <mat-checkbox>教育培训</mat-checkbox>
+          <mat-checkbox>设计</mat-checkbox>
+          <mat-checkbox>娱乐</mat-checkbox>
+          <mat-checkbox>旅游</mat-checkbox>
+          <mat-checkbox>其他</mat-checkbox>
+        </section>
+      </div>
+      <div class="content-section-row">
+        <mat-form-field>
+          <input matInput placeholder="合同名称" [ngModel]="request.colContractName" [readonly]="true">
+          <mat-hint>Contract Name</mat-hint>
+        </mat-form-field>
+      </div>
+      <div class="content-section-row">
+        <div class="content-section-left-column">
+          <mat-form-field>
+            <input matInput placeholder="作业或劳务地点" [ngModel]="request.colProjectLocation" [readonly]="true">
+            <mat-hint>Location of Project or Labor</mat-hint>
+          </mat-form-field>
+        </div>
+        <div class="content-section-right-column">
+          <mat-form-field>
+            <input matInput placeholder="在华作业或劳务人数" [ngModel]="request.colWorkforceAmount" [readonly]="true">
+            <mat-hint>Number of People Participating in Operation or Labor Project in China</mat-hint>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="content-section-row">
+        <div class="content-section-left-column">
+          <mat-form-field>
+            <input matInput placeholder="合同期限(天)" [ngModel]="request.colContractPeroid" [readonly]="true">
+            <mat-hint>Term of Contract (Day)</mat-hint>
+          </mat-form-field>
+        </div>
+        <div class="content-section-right-column">
+          <mat-form-field>
+            <input matInput placeholder="签订合同日期" [ngModel]="request.colContractSignDate | date: 'yyyy/MM/dd'"
+              [readonly]="true">
+            <mat-hint>Date of Signing Contract</mat-hint>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="content-section-row">
+        <div class="content-section-left-column">
+          <mat-form-field>
+            <input matInput placeholder="合同执行起始日期" [ngModel]="request.colContractStartDate | date: 'yyyy/MM/dd'"
+              [readonly]="true">
+            <mat-hint>Start Date of Contract Execution</mat-hint>
+          </mat-form-field>
+        </div>
+        <div class="content-section-right-column">
+          <mat-form-field>
+            <input matInput placeholder="合同执行终止日期" [ngModel]="request.colContractEndDate | date: 'yyyy/MM/dd'"
+              [readonly]="true">
+            <mat-hint>Date of Contract Termination</mat-hint>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="content-section-row">
+        <div class="content-section-left-column">
+          <mat-form-field>
+            <input matInput placeholder="是否开口合同" [ngModel]="request.colOpenContract" [readonly]="true">
+            <mat-hint>Open-end Contract or not</mat-hint>
+          </mat-form-field>
+        </div>
+        <div class="content-section-left-column" *ngIf="request.colOpenContract == '是'">
+          <mat-form-field>
+            <input matInput placeholder="付款次数" [ngModel]="request.colPaymentTimes" [readonly]="true">
+            <mat-hint>Payment times</mat-hint>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="content-section-row">
+        <div class="content-section-left-column">
+          <mat-form-field>
+            <input matInput placeholder="合同金额是否含税" [ngModel]="request.colIncludeTax" [readonly]="true">
+            <mat-hint>Contract Amount Including Tax or not</mat-hint>
+          </mat-form-field>
+        </div>
+        <div class="content-section-right-column">
+          <mat-form-field>
+            <input matInput placeholder="合同币种" [ngModel]="request.colCurrency" [readonly]="true">
+            <mat-hint>Currency</mat-hint>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="content-section-row">
+        <div class="content-section-left-column">
+          <mat-form-field>
+            <input matInput placeholder="合同金额" [ngModel]="request.colContractAmount" [readonly]="true">
+            <mat-hint>Contract Amount</mat-hint>
+          </mat-form-field>
+        </div>
+        <div class="content-section-right-column">
+          <mat-form-field>
+            <input matInput placeholder="所得项目" [ngModel]="request.colOutput" [readonly]="true">
+            <mat-hint>Income Item</mat-hint>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="content-section-row">
+        <mat-form-field>
+          <input matInput placeholder="协定所得项目" [ngModel]="request.colAgreedOutput" [readonly]="true">
+          <mat-hint>Accord Income Item</mat-hint>
+        </mat-form-field>
+      </div>
+    </li>
+  </ul>
+  <h4 class="content-section-header">备注 Note</h4>
+  <ul class="list-group borderless">
+    <li class="list-group-item content-section">
+      <div class="content-section-row content-section-textarea-row">
+        <mat-form-field class="textarea">
+          <textarea matInput placeholder="备注1" [ngModel]="request.colComment1" [readonly]="true"></textarea>
+          <mat-hint>Note 1</mat-hint>
+        </mat-form-field>
+      </div>
+      <div class="content-section-row content-section-textarea-row">
+        <mat-form-field class="textarea">
+          <textarea matInput placeholder="备注2" [ngModel]="request.colComment2" [readonly]="true"></textarea>
+          <mat-hint>Note 2</mat-hint>
+        </mat-form-field>
+      </div>
+      <div class="content-section-row content-section-textarea-row">
+        <mat-form-field class="textarea">
+          <textarea matInput placeholder="备注3" [ngModel]="request.colComment3" [readonly]="true"></textarea>
+          <mat-hint>Note 3</mat-hint>
+        </mat-form-field>
+      </div>
+      <div class="content-section-row content-section-textarea-row">
+        <mat-form-field class="textarea">
+          <textarea matInput placeholder="备注4" [ngModel]="request.colComment4" [readonly]="true"></textarea>
+          <mat-hint>Note 4</mat-hint>
+        </mat-form-field>
+      </div>
+      <div class="content-section-row content-section-textarea-row">
+        <mat-form-field class="textarea">
+          <textarea matInput placeholder="备注5" [ngModel]="request.colComment5" [readonly]="true"></textarea>
+          <mat-hint>Note 5</mat-hint>
+        </mat-form-field>
+      </div>
+    </li>
+  </ul>
+  <h4 class="content-section-header" *ngIf="request.colRequestStatus == requestStatus.Active && request.colOpenContract == '是' && request.colRemainedPaymentCounter > 0 && request.colRemainedUnpayedAmount > 0">支付情况
+    Payment Detail</h4>
+  <ul class="list-group borderless" *ngIf="request.colRequestStatus == requestStatus.Active && request.colOpenContract == '是' && request.colRemainedPaymentCounter > 0 && request.colRemainedUnpayedAmount > 0">
+    <li class="list-group-item content-section">
+      <div class="content-section-row">
+        <div class="content-section-left-column">
+          <mat-form-field>
+            <input matInput placeholder="剩余付款次数" [ngModel]="request.colRemainedPaymentCounter" [readonly]="true">
+            <mat-hint>Remained Slots</mat-hint>
+          </mat-form-field>
+        </div>
+        <div class="content-section-right-column">
+          <mat-form-field>
+            <input matInput placeholder="剩余付款金额" [ngModel]="request.colRemainedUnpayedAmount" [readonly]="true">
+            <mat-hint>Unpayed Amount</mat-hint>
+          </mat-form-field>
+        </div>
+      </div>
+    </li>
+  </ul>
+  <h4 class="content-section-header">附件 Attachment</h4>
+  <ul class="list-group borderless">
+    <li class="list-group-item content-section">
+      <table>
+        <tbody>
+          <tr *ngFor="let item of attachments">
+            <td>
+              <a [attr.href]="item.ServerRelativePath.DecodedUrl" target="_blank">{{ item.FileName }}</a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </li>
+  </ul>
+  <div class="button-section">
+    <div class="button-block">
+      <button (click)="onbtnCloseClick()" type="button">Close</button>
+    </div>
+  </div>
+</div>

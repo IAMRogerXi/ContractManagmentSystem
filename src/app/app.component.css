@@ -1,0 +1,18 @@
+.side-menu {
+    width: 180px;
+    top: 0;
+    left: 40px;
+    margin-left: 20px;
+}
+
+.content {
+    width: calc(100% - 200px);
+    height: 100%;
+    padding-top: 110px;
+    padding-left: 40px;
+    padding-right: 40px;
+    transition: all 0.3s;
+    position: absolute;
+    top: 0;
+    right: 0;
+}

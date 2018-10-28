@@ -1,0 +1,57 @@
+.form {
+    padding-top: 20px;
+    padding-bottom: 40px;
+}
+
+.content-section-header {
+    font-weight: bold;
+}
+
+.content-section {
+    padding-left: 60px;
+    padding-bottom: 25px;
+}
+
+.content-section-row {
+    height: 70px;
+}
+
+.content-section-left-column {
+    display: inline-block;
+    width: 40%;
+}
+
+.content-section-right-column {
+    display: inline-block;
+}
+
+.content-section-textarea-row {
+    height: 90px;
+}
+
+.button-section {
+    text-align: center;    
+}
+
+.button-block {
+    display: inline-block; 
+    width: 10%;
+}
+
+.form input {
+    border:none;
+}
+
+.form-font-color {
+    color: #757575;
+}
+
+.checkbox {
+    height: 85px;
+    width: 60%;
+}
+
+.textarea {
+    width: 300px;
+    padding: 0px;
+}

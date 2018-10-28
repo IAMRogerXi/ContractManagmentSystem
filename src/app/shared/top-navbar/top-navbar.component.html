@@ -1,0 +1,53 @@
+<ul class="nav nav-tabs">
+  <li *ngIf="contractFilingRequestGroup" [ngClass]="{'active': id === topNavBarMenuId.MyContractFilingRequeset }">
+    <a [routerLink]="['/ListContractFilingRequest']">My Requests</a>
+  </li>
+  <li *ngIf="contractFilingRequestGroup" [ngClass]="{'active': id === topNavBarMenuId.NewContractFilingRequeset }">
+    <a [routerLink]="['/AddContractFilingRequest']">New Request</a>
+  </li>
+  <li *ngIf="paymentRequestGroup" [ngClass]="{'active': id === topNavBarMenuId.MyPaymentRequeset }">
+    <a [routerLink]="['/ListPaymentRequest']">My Requests</a>
+  </li>
+  <li *ngIf="siteTaxTeamGroup" [ngClass]="{'active': id === topNavBarMenuId.ContractFilingRequestTasks }">
+    <a [routerLink]="['/ListContractFilingRequestTask']">Contract Filing Request Tasks</a>
+  </li>
+  <li *ngIf="siteTaxTeamGroup" [ngClass]="{'active': id === topNavBarMenuId.PaymentRequestTasksForSiteTaxTeam }">
+    <a [routerLink]="['/ListPaymentRequestTask']">Payment Request Tasks</a>
+  </li>
+  <li *ngIf="siteTaxTeamGroup" [ngClass]="{'active': id === topNavBarMenuId.AllContractFilingRequestsForSiteTaxTeam }">
+    <a>All Contract Filing Requests</a>
+  </li>
+  <li *ngIf="siteTaxTeamGroup" [ngClass]="{'active': id === topNavBarMenuId.AllPaymentRequestsForSiteTaxTeam }">
+    <a>All Payment Requests</a>
+  </li>
+  <li *ngIf="reviewGroup" [ngClass]="{'active': id === topNavBarMenuId.PaymentRequestTasksForReviewer }">
+    <a [routerLink]="['/ListReviewerPaymentRequestTask']">Payment Request Tasks</a>
+  </li>
+  <li *ngIf="reviewGroup" [ngClass]="{'active': id === topNavBarMenuId.AllContractFilingRequestsForReviewer }">
+    <a>All Contract Filing Requests</a>
+  </li>
+  <li *ngIf="reviewGroup" [ngClass]="{'active': id === topNavBarMenuId.AllPaymentRequestsForReviewer }">
+    <a>All Payment Requests</a>
+  </li>
+  <li *ngIf="approvalGroup" [ngClass]="{'active': id === topNavBarMenuId.PaymentRequestTasksForApprover }">
+    <a [routerLink]="['/ListApproverPaymentRequestTask']">Payment Request Tasks</a>
+  </li>
+  <li *ngIf="approvalGroup" [ngClass]="{'active': id === topNavBarMenuId.AllContractFilingRequestsForApprover }">
+    <a>All Contract Filing Requests</a>
+  </li>
+  <li *ngIf="approvalGroup" [ngClass]="{'active': id === topNavBarMenuId.AllPaymentRequestsForApprover }">
+    <a>All Payment Requests</a>
+  </li>
+  <li *ngIf="exceptionRequestGroup" [ngClass]="{'active': id === topNavBarMenuId.ExceptionRequest }">
+    <a [routerLink]="['/AddExceptionPaymentRequest']">New Request</a>
+  </li>
+  <li *ngIf="adminGroup" [ngClass]="{'active': id === topNavBarMenuId.Admin }">
+    <a [routerLink]="['/CentralAdmin']">Admin</a>
+  </li>
+  <li *ngIf="supportingDocumentsGroup" [ngClass]="{'active': id === topNavBarMenuId.SupportingDocuments }">
+    <a [routerLink]="['/SupportingDocuments']">Supporting Documents</a>
+  </li>
+  <li *ngIf="ptpGroup" [ngClass]="{'active': id === topNavBarMenuId.AllPaymentRequestsForPTPTeam }">
+      <a [routerLink]="['/PTP']">Payment Request Tasks</a>
+    </li>
+</ul>

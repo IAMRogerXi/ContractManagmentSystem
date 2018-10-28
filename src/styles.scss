@@ -1,0 +1,53 @@
+@import '~bootstrap/dist/css/bootstrap.min.css';
+@import '../node_modules/@angular/material/theming';
+@import "../node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css";
+@import url('//fonts.googleapis.com/icon?family=Material+Icons');
+
+@include mat-core();
+
+$primary: mat-palette($mat-indigo, 500);
+$accent:  mat-palette($mat-pink, 500, A200, A400);
+$warn:    mat-palette($mat-red, 500);
+
+$theme: mat-light-theme($primary, $accent, $warn);
+
+@include angular-material-theme($theme);
+
+.loading-indicator {
+    position: fixed;
+    z-index: 9999;
+    height: 2em;
+    width: 2em;
+    overflow: show;
+    margin: auto;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+}
+  
+.loading-indicator:before {
+    content: '';
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.3);
+}
+
+.table-header-left {
+    vertical-align: middle;
+    display: inline-block !important;
+}
+
+.table-header-right {
+    vertical-align: middle;
+    text-align: left;
+    display: inline-block !important;
+}
+
+.contextMenu input {
+    border:none;
+  }

@@ -1,0 +1,1 @@
+export * from './view-payment-request-task.component';

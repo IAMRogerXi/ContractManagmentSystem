@@ -1,0 +1,27 @@
+<div class="form">
+  <h4 class="content-section-header">完税证明 Tax Document</h4>
+  <ul class="list-group borderless">
+    <li class="list-group-item content-section">
+      <table>
+        <tbody>
+          <tr>
+            <input type="file" id="file" #fileUploader (change)="onFileInputChanged($event.target.files); fileUploader.value=''">
+          </tr>
+          <tr *ngFor="let item of fileList">
+            <td>
+              {{ item.name }} <a *ngIf="item.name != null" (click)="onbtnDeleteFileClick(item.name)">delete</a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </li>
+  </ul>
+  <div class="button-section">
+    <div class="button-block">
+      <button (click)="onbtnUploadDocumentClick()" type="button">Send to PTP</button>
+    </div>
+    <div class="button-block">
+      <button (click)="onbtnCloseClick()" type="button">Close</button>
+    </div>
+  </div>
+</div>

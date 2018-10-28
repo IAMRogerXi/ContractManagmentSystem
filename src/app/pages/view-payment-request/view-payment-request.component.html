@@ -1,0 +1,354 @@
+<div class="form" id="requestForm">
+  <h4 class="content-section-header" *ngIf="request.colExceptionPaymentRequest == 'TRUE'">额外支付请求 Exception Request</h4>
+  <h4 class="content-section-header">USER填写 Filled in by User</h4>
+  <ul class="list-group borderless">
+    <li class="list-group-item content-section">
+      <div class="content-section-row">
+        <div class="content-section-left-column">
+          <mat-form-field>
+            <input matInput placeholder="公司代码" [ngModel]="request.colCompanyCode" [readonly]="true">
+            <mat-hint>Company Code</mat-hint>
+          </mat-form-field>
+        </div>
+        <div class="content-section-right-column">
+          <mat-form-field>
+            <input matInput placeholder="合同编号" [ngModel]="request.colContractID" [readonly]="true">
+            <mat-hint>Contract Number</mat-hint>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="content-section-row">
+        <div class="content-section-left-column">
+          <mat-form-field>
+            <input matInput placeholder="供应商代码" [ngModel]="request.colVendorID" [readonly]="true">
+            <mat-hint>Vendor Code</mat-hint>
+          </mat-form-field>
+        </div>
+        <div class="content-section-right-column">
+          <mat-form-field>
+            <input matInput placeholder="供应商名称" [ngModel]="request.colVendorName" [readonly]="true">
+            <mat-hint>Vendor Name</mat-hint>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="content-section-row">
+        <div class="content-section-left-column">
+          <mat-form-field>
+            <input matInput placeholder="发票号码" [ngModel]="request.colInvoiceID" [readonly]="true">
+            <mat-hint>Invoice Number</mat-hint>
+          </mat-form-field>
+        </div>
+        <div class="content-section-right-column">
+          <mat-form-field>
+            <input matInput placeholder="入账barcode" [ngModel]="request.colBarcode" [readonly]="true">
+            <mat-hint>Booking Barcode</mat-hint>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="content-section-row">
+        <div class="content-section-left-column">
+          <mat-form-field>
+            <input matInput placeholder="发票金额" [ngModel]="request.colInvoiceAmount" [readonly]="true">
+            <mat-hint>Invoice Amount</mat-hint>
+          </mat-form-field>
+        </div>
+        <div class="content-section-right-column">
+          <mat-form-field>
+            <input matInput placeholder="合同币种" [ngModel]="request.colCurrency" [readonly]="true">
+            <mat-hint>Currency</mat-hint>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="content-section-row">
+        <div class="content-section-left-column">
+          <mat-form-field>
+            <input matInput placeholder="服务发生地点" [ngModel]="request.colServiceLocation" [readonly]="true">
+            <mat-hint>Location of Service</mat-hint>
+          </mat-form-field>
+        </div>
+        <div class="content-section-right-column">
+          <mat-form-field>
+            <input matInput placeholder="成本中心" [ngModel]="request.colCostCenter" [readonly]="true">
+            <mat-hint>Cost Center</mat-hint>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="content-section-row">
+        <div class="content-section-left-column">
+          <mat-form-field>
+            <input matInput placeholder="费用总账科目" [ngModel]="request.colCategory" [readonly]="true">
+            <mat-hint>GL Account</mat-hint>
+          </mat-form-field>
+        </div>
+        <div class="content-section-right-column">
+          <mat-form-field>
+            <input matInput placeholder="IO/WBS" [ngModel]="request.colIO_WBS" [readonly]="true">
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="content-section-row">
+        <div class="content-section-left-column">
+          <mat-form-field>
+            <input matInput placeholder="DO" [ngModel]="request.colDO" [readonly]="true">
+          </mat-form-field>
+        </div>
+      </div>
+    </li>
+  </ul>
+  <h4 class="content-section-header">备注 Note</h4>
+  <ul class="list-group borderless">
+    <li class="list-group-item content-section">
+      <div class="content-section-row content-section-textarea-row">
+        <mat-form-field class="textarea">
+          <textarea matInput placeholder="备注1" [ngModel]="request.colComment1" [readonly]="true"></textarea>
+          <mat-hint>Note 1</mat-hint>
+        </mat-form-field>
+      </div>
+      <div class="content-section-row content-section-textarea-row">
+        <mat-form-field class="textarea">
+          <textarea matInput placeholder="备注2" [ngModel]="request.colComment2" [readonly]="true"></textarea>
+          <mat-hint>Note 2</mat-hint>
+        </mat-form-field>
+      </div>
+      <div class="content-section-row content-section-textarea-row">
+        <mat-form-field class="textarea">
+          <textarea matInput placeholder="备注3" [ngModel]="request.colComment3" [readonly]="true"></textarea>
+          <mat-hint>Note 3</mat-hint>
+        </mat-form-field>
+      </div>
+      <div class="content-section-row content-section-textarea-row">
+        <mat-form-field class="textarea">
+          <textarea matInput placeholder="备注4" [ngModel]="request.colComment4" [readonly]="true"></textarea>
+          <mat-hint>Note 4</mat-hint>
+        </mat-form-field>
+      </div>
+      <div class="content-section-row content-section-textarea-row">
+        <mat-form-field class="textarea">
+          <textarea matInput placeholder="备注5" [ngModel]="request.colComment5" [readonly]="true"></textarea>
+          <mat-hint>Note 5</mat-hint>
+        </mat-form-field>
+      </div>
+    </li>
+  </ul>
+  <h4 class="content-section-header" *ngIf="request.colRequestStatus != requestStatus.Draft && request.colRequestStatus != requestStatus.PendingSiteTaxTeam && request.colRequestStatus != requestStatus.ReturnedFromSiteTaxTeam && request.colRequestStatus != requestStatus.Cancelled">税金
+    Tax Detail</h4>
+  <ul class="list-group borderless" *ngIf="request.colRequestStatus != requestStatus.Draft && request.colRequestStatus != requestStatus.PendingSiteTaxTeam && request.colRequestStatus != requestStatus.ReturnedFromSiteTaxTeam && request.colRequestStatus != requestStatus.Cancelled">
+    <li class="list-group-item content-section">
+      <div class="content-section-row">
+        <div class="content-section-left-column">
+          <mat-form-field>
+            <input matInput placeholder="合同金额是否含税" [ngModel]="request.colIncludeTax" [readonly]="true">
+            <mat-hint>Contract Amount Including Tax or not</mat-hint>
+          </mat-form-field>
+        </div>
+        <div class="content-section-right-column">
+          <mat-form-field>
+            <input matInput placeholder="汇率" [ngModel]="request.colExchangeRate" [readonly]="true">
+            <mat-hint>Exchange Rate</mat-hint>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="content-section-row">
+        <div class="content-section-left-column">
+          <mat-form-field>
+            <input matInput placeholder="应税收入" [ngModel]="request.colTaxableIncoming" [readonly]="true">
+            <mat-hint>Taxable Income</mat-hint>
+          </mat-form-field>
+        </div>
+        <div class="content-section-right-column">
+          <mat-form-field>
+            <input matInput placeholder="利润率" [ngModel]="request.colProfitMargin" [readonly]="true">
+            <mat-hint>Profit Margin</mat-hint>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="content-section-row">
+        <div class="content-section-left-column">
+          <mat-form-field>
+            <input matInput placeholder="所得税" [ngModel]="request.colIncomeTax" [readonly]="true">
+            <mat-hint>Corporate Income Tax</mat-hint>
+          </mat-form-field>
+        </div>
+        <div class="content-section-right-column">
+          <mat-form-field>
+            <input matInput placeholder="增值税" [ngModel]="request.colValueAddedTax" [readonly]="true">
+            <mat-hint>Value Added Tax</mat-hint>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="content-section-row">
+        <div class="content-section-left-column">
+          <mat-form-field>
+            <input matInput placeholder="城市建设税" [ngModel]="request.colCityPlanningTax" [readonly]="true">
+            <mat-hint>City Construction Tax</mat-hint>
+          </mat-form-field>
+        </div>
+        <div class="content-section-right-column">
+          <mat-form-field>
+            <input matInput placeholder="教育费附加" [ngModel]="request.colEducationFund" [readonly]="true">
+            <mat-hint>Education Supplementary Fee</mat-hint>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="content-section-row">
+        <div class="content-section-left-column">
+          <mat-form-field>
+            <input matInput placeholder="地方教育费附加" [ngModel]="request.colLocalEducationFund" [readonly]="true">
+            <mat-hint>Local Education Supplementary Fee</mat-hint>
+          </mat-form-field>
+        </div>
+        <div class="content-section-right-column">
+          <mat-form-field>
+            <input matInput placeholder="河道管理费/水利基金" [ngModel]="request.colWaterConstructionFunds" [readonly]="true">
+            <mat-hint>River Management Fee/Water Resources Fund</mat-hint>
+          </mat-form-field>
+        </div>
+      </div>
+    </li>
+  </ul>
+  <h4 class="content-section-header" *ngIf="request.colRequestStatus != requestStatus.Draft && request.colRequestStatus != requestStatus.PendingSiteTaxTeam && request.colRequestStatus != requestStatus.ReturnedFromSiteTaxTeam && request.colRequestStatus != requestStatus.Cancelled">其他税金
+    Additional Tax Detail</h4>
+  <ul class="list-group borderless" *ngIf="request.colRequestStatus != requestStatus.Draft && request.colRequestStatus != requestStatus.PendingSiteTaxTeam && request.colRequestStatus != requestStatus.ReturnedFromSiteTaxTeam && request.colRequestStatus != requestStatus.Cancelled">
+    <li class="list-group-item content-section">
+      <div class="content-section-row">
+        <div style="display: inline-block; width: 30%;">
+          <mat-form-field>
+            <input matInput placeholder="其他税种1" [ngModel]="request.colOtherTaxName1" [readonly]="true">
+            <mat-hint>Tax Category</mat-hint>
+          </mat-form-field>
+        </div>
+        <div style="display: inline-block; width: 30%;">
+          <mat-form-field>
+            <input matInput placeholder="税率" [ngModel]="request.colOtherTaxRate1" [readonly]="true">
+            <mat-hint>Tax Rate</mat-hint>
+          </mat-form-field>
+        </div>
+        <div style="display: inline-block; width: 30%;">
+          <mat-form-field>
+            <input matInput placeholder="税金" [ngModel]="request.colOtherTax1" [readonly]="true">
+            <mat-hint>Tax</mat-hint>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="content-section-row">
+        <div style="display: inline-block; width: 30%;">
+          <mat-form-field>
+            <input matInput placeholder="其他税种2" [ngModel]="request.colOtherTaxName2" [readonly]="true">
+            <mat-hint>Tax Category</mat-hint>
+          </mat-form-field>
+        </div>
+        <div style="display: inline-block; width: 30%;">
+          <mat-form-field>
+            <input matInput placeholder="税率" [ngModel]="request.colOtherTaxRate2" [readonly]="true">
+            <mat-hint>Tax Rate</mat-hint>
+          </mat-form-field>
+        </div>
+        <div style="display: inline-block; width: 30%;">
+          <mat-form-field>
+            <input matInput placeholder="税金" [ngModel]="request.colOtherTax2" [readonly]="true">
+            <mat-hint>Tax</mat-hint>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="content-section-row">
+        <div style="display: inline-block; width: 30%;">
+          <mat-form-field>
+            <input matInput placeholder="其他税种3" [ngModel]="request.colOtherTaxName3" [readonly]="true">
+            <mat-hint>Tax Category</mat-hint>
+          </mat-form-field>
+        </div>
+        <div style="display: inline-block; width: 30%;">
+          <mat-form-field>
+            <input matInput placeholder="税率" [ngModel]="request.colOtherTaxRate3" [readonly]="true">
+            <mat-hint>Tax Rate</mat-hint>
+          </mat-form-field>
+        </div>
+        <div style="display: inline-block; width: 30%;">
+          <mat-form-field>
+            <input matInput placeholder="税金" [ngModel]="request.colOtherTax3" [readonly]="true">
+            <mat-hint>Tax</mat-hint>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="content-section-row">
+        <div style="display: inline-block; width: 30%;">
+          <mat-form-field>
+            <input matInput placeholder="其他税种4" [ngModel]="request.colOtherTaxName4" [readonly]="true">
+            <mat-hint>Tax Category</mat-hint>
+          </mat-form-field>
+        </div>
+        <div style="display: inline-block; width: 30%;">
+          <mat-form-field>
+            <input matInput placeholder="税率" [ngModel]="request.colOtherTaxRate4" [readonly]="true">
+            <mat-hint>Tax Rate</mat-hint>
+          </mat-form-field>
+        </div>
+        <div style="display: inline-block; width: 30%;">
+          <mat-form-field>
+            <input matInput placeholder="税金" [ngModel]="request.colOtherTax4" [readonly]="true">
+            <mat-hint>Tax</mat-hint>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="content-section-row">
+        <div style="display: inline-block; width: 30%;">
+          <mat-form-field>
+            <input matInput placeholder="其他税种5" [ngModel]="request.colOtherTaxName5" [readonly]="true">
+            <mat-hint>Tax Category</mat-hint>
+          </mat-form-field>
+        </div>
+        <div style="display: inline-block; width: 30%;">
+          <mat-form-field>
+            <input matInput placeholder="税率" [ngModel]="request.colOtherTaxRate5" [readonly]="true">
+            <mat-hint>Tax Rate</mat-hint>
+          </mat-form-field>
+        </div>
+        <div style="display: inline-block; width: 30%;">
+          <mat-form-field>
+            <input matInput placeholder="税金" [ngModel]="request.colOtherTax5" [readonly]="true">
+            <mat-hint>Tax</mat-hint>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="content-section-row">
+        <div style="display: inline-block; width: 30%;">
+          <mat-form-field>
+            <input matInput placeholder="其他税种6" [ngModel]="request.colOtherTaxName6" [readonly]="true">
+            <mat-hint>Tax Category</mat-hint>
+          </mat-form-field>
+        </div>
+        <div style="display: inline-block; width: 30%;">
+          <mat-form-field>
+            <input matInput placeholder="税率" [ngModel]="request.colOtherTaxRate6" [readonly]="true">
+            <mat-hint>Tax Rate</mat-hint>
+          </mat-form-field>
+        </div>
+        <div style="display: inline-block; width: 30%;">
+          <mat-form-field>
+            <input matInput placeholder="税金" [ngModel]="request.colOtherTax6" [readonly]="true">
+            <mat-hint>Tax</mat-hint>
+          </mat-form-field>
+        </div>
+      </div>
+    </li>
+  </ul>
+  <h4 class="content-section-header">附件 Attachment</h4>
+  <ul class="list-group borderless">
+    <li class="list-group-item content-section">
+      <table>
+        <tbody>
+          <tr *ngFor="let item of attachments">
+            <td>
+              <a [attr.href]="item.ServerRelativePath.DecodedUrl" target="_blank">{{ item.FileName }}</a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </li>
+  </ul>
+  <div class="button-section">
+    <div class="button-block">
+      <button (click)="onbtnCloseClick()" type="button">Close</button>
+    </div>
+  </div>
+</div>

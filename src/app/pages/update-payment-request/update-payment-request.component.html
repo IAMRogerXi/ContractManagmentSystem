@@ -1,0 +1,201 @@
+<form class="form" #addPaymentRequestForm="ngForm" (ngSubmit)="onformSubmit()">
+  <h4 class="content-section-header">USER填写 Filled in by User</h4>
+  <ul class="list-group borderless">
+    <li class="list-group-item content-section">
+      <div class="content-section-row">
+        <div class="content-section-left-column">
+          <mat-form-field>
+            <input matInput placeholder="公司代码" [(ngModel)]="request.colCompanyCode" id="colCompanyCode" name="colCompanyCode"
+              #colCompanyCode="ngModel" [readonly]="true">
+            <mat-hint>Company Code</mat-hint>
+          </mat-form-field>
+        </div>
+        <div class="content-section-right-column">
+          <mat-form-field>
+            <input matInput placeholder="合同编号" [(ngModel)]="request.colContractID" id="colContractID" name="colContractID"
+              #colContractID="ngModel" [readonly]="true">
+            <mat-hint>Contract Number</mat-hint>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="content-section-row">
+        <div class="content-section-left-column">
+          <mat-form-field>
+            <input matInput placeholder="供应商代码" [(ngModel)]="request.colVendorID" id="colVendorID" name="colVendorID"
+              #colVendorID="ngModel" required>
+            <mat-hint>Vendor Code</mat-hint>
+            <mat-error *ngIf="colVendorID.hasError('required')">
+              required
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="content-section-right-column">
+          <mat-form-field>
+            <input matInput placeholder="供应商名称" [(ngModel)]="request.colVendorName" id="colVendorName" name="colVendorName"
+              #colVendorName="ngModel" required>
+            <mat-hint>Vendor Name</mat-hint>
+            <mat-error *ngIf="colVendorName.hasError('required')">
+              required
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="content-section-row">
+        <div class="content-section-left-column">
+          <mat-form-field>
+            <input matInput placeholder="发票号码" [(ngModel)]="request.colInvoiceID" id="colInvoiceID" name="colInvoiceID"
+              #colInvoiceID="ngModel" required>
+            <mat-hint>Invoice Number</mat-hint>
+            <mat-error *ngIf="colInvoiceID.hasError('required')">
+              required
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="content-section-right-column">
+          <mat-form-field>
+            <input matInput placeholder="入账barcode" [(ngModel)]="request.colBarcode" id="colBarcode" name="colBarcode"
+              #colBarcode="ngModel" required>
+            <mat-hint>Booking Barcode</mat-hint>
+            <mat-error *ngIf="colBarcode.hasError('required')">
+              required
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="content-section-row">
+        <div class="content-section-left-column">
+          <mat-form-field>
+            <input matInput placeholder="发票金额" [(ngModel)]="request.colInvoiceAmount" id="colInvoiceAmount" name="colInvoiceAmount"
+              #colInvoiceAmount="ngModel" required>
+            <mat-hint>Invoice Amount</mat-hint>
+            <mat-error *ngIf="colInvoiceAmount.hasError('required')">
+              required
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="content-section-right-column">
+          <mat-form-field>
+            <mat-select matInput placeholder="合同币种" [(ngModel)]="request.colCurrency" id="colCurrency" name="colCurrency"
+              #colCurrency="ngModel" required>
+              <mat-option *ngFor="let item of metadataCurrency" value={{item.colCurrency}}>
+                {{item.colCurrency}}
+              </mat-option>
+            </mat-select>
+            <mat-hint>Currency</mat-hint>
+            <mat-error *ngIf="colCurrency.hasError('required')">
+              required
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="content-section-row">
+        <div class="content-section-left-column">
+          <mat-form-field>
+            <input matInput placeholder="服务发生地点" [(ngModel)]="request.colServiceLocation" id="colServiceLocation" name="colServiceLocation"
+              #colServiceLocation="ngModel" required>
+            <mat-hint>Location of Service</mat-hint>
+            <mat-error *ngIf="colServiceLocation.hasError('required')">
+              required
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="content-section-right-column">
+          <mat-form-field>
+            <input matInput placeholder="成本中心" [(ngModel)]="request.colCostCenter" id="colCostCenter" name="colCostCenter"
+              #colCostCenter="ngModel" required>
+            <mat-hint>Cost Center</mat-hint>
+            <mat-error *ngIf="colCostCenter.hasError('required')">
+              required
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="content-section-row">
+        <div class="content-section-left-column">
+          <mat-form-field>
+            <input matInput placeholder="费用总账科目" [(ngModel)]="request.colCategory" id="colCategory" name="colCategory"
+              #colCategory="ngModel" required>
+            <mat-hint>GL Account</mat-hint>
+            <mat-error *ngIf="colCategory.hasError('required')">
+              required
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div class="content-section-right-column">
+          <mat-form-field>
+            <input matInput placeholder="IO/WBS" [(ngModel)]="request.colIO_WBS" id="colIO_WBS" name="colIO_WBS"
+              #colIO_WBS="ngModel" required>
+            <mat-error *ngIf="colIO_WBS.hasError('required')">
+              required
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+      <div class="content-section-row">
+        <div class="content-section-left-column">
+          <mat-form-field>
+            <input matInput placeholder="DO" [(ngModel)]="request.colDO" id="colDO" name="colDO" #colDO="ngModel"
+              required>
+            <mat-error *ngIf="colDO.hasError('required')">
+              required
+            </mat-error>
+          </mat-form-field>
+        </div>
+      </div>
+    </li>
+  </ul>
+  <h4 class="content-section-header">备注 Note</h4>
+  <ul class="list-group borderless">
+    <li class="list-group-item content-section">
+      <div class="content-section-row content-section-textarea-row">
+        <mat-form-field class="textarea">
+          <textarea matInput placeholder="备注1" [(ngModel)]="request.colComment1" id="colComment1" name="colComment1"
+            #colComment1="ngModel"></textarea>
+          <mat-hint>Note 1</mat-hint>
+        </mat-form-field>
+      </div>
+      <div class="content-section-row content-section-textarea-row">
+        <mat-form-field class="textarea">
+          <textarea matInput placeholder="备注2" [(ngModel)]="request.colComment2" id="colComment2" name="colComment2"
+            #colComment2="ngModel"></textarea>
+          <mat-hint>Note 2</mat-hint>
+        </mat-form-field>
+      </div>
+      <div class="content-section-row content-section-textarea-row">
+        <mat-form-field class="textarea">
+          <textarea matInput placeholder="备注3" [(ngModel)]="request.colComment3" id="colComment3" name="colComment3"
+            #colComment3="ngModel"></textarea>
+          <mat-hint>Note 3</mat-hint>
+        </mat-form-field>
+      </div>
+      <div class="content-section-row content-section-textarea-row">
+        <mat-form-field class="textarea">
+          <textarea matInput placeholder="备注4" [(ngModel)]="request.colComment4" id="colComment4" name="colComment4"
+            #colComment4="ngModel"></textarea>
+          <mat-hint>Note 4</mat-hint>
+        </mat-form-field>
+      </div>
+      <div class="content-section-row content-section-textarea-row">
+        <mat-form-field class="textarea">
+          <textarea matInput placeholder="备注5" [(ngModel)]="request.colComment5" id="colComment5" name="colComment5"
+            #colComment5="ngModel"></textarea>
+          <mat-hint>Note 5</mat-hint>
+        </mat-form-field>
+      </div>
+    </li>
+  </ul>
+  <div *ngIf="displayMessage">
+    {{message}}
+  </div>
+  <div class="button-section">
+    <div class="button-block">
+      <button (click)="onbtnSaveDaftClick()" type="button">Save Draft</button>
+    </div>
+    <div class="button-block">
+      <button type="submit">Submit</button>
+    </div>
+    <div class="button-block">
+      <button (click)="onbtnCloseClick()" type="button">Close</button>
+    </div>
+  </div>
+</form>

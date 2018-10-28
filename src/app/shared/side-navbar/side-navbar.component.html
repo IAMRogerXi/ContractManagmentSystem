@@ -1,0 +1,38 @@
+<ul class="nav nav-pills nav-stacked">
+  <li *ngIf="displayRequester" (click)="sideNavbarClick(sideNavBarMenuId.ContractFilingRequest)" [ngClass]="{ 'active': menuItemID === sideNavBarMenuId.ContractFilingRequest }">
+    <a [routerLink]="['/ContractFilingRequest']">
+      <i class="fa fa-fw"></i>Contract Filing Request</a>
+  </li>
+  <li *ngIf="displayRequester" (click)="sideNavbarClick(sideNavBarMenuId.PaymentRequest)" [ngClass]="{ 'active': menuItemID === sideNavBarMenuId.PaymentRequest }">
+    <a [routerLink]="['/PaymentRequest']">
+      <i class="fa fa-fw"></i>Payment Request</a>
+  </li>
+  <li *ngIf="displaySiteTaxTeam" (click)="sideNavbarClick(sideNavBarMenuId.SiteTaxTeam)" [ngClass]="{ 'active': menuItemID===sideNavBarMenuId.SiteTaxTeam }">
+    <a [routerLink]="['/SiteTaxTeam']">
+      <i class="fa fa-fw"></i>Site Tax Team</a>
+  </li>
+  <li *ngIf="displayReview" (click)="sideNavbarClick(sideNavBarMenuId.Review)" [ngClass]="{ 'active': menuItemID===sideNavBarMenuId.Review }">
+    <a [routerLink]="['/Review']">
+      <i class="fa fa-fw"></i>Review</a>
+  </li>
+  <li *ngIf="displayApproval" (click)="sideNavbarClick(sideNavBarMenuId.Approval)" [ngClass]="{ 'active': menuItemID===sideNavBarMenuId.Approval }">
+    <a [routerLink]="['/Approval']">
+      <i class="fa fa-fw"></i>Approval</a>
+  </li>
+  <li *ngIf="displayExceptionRequest" (click)="sideNavbarClick(sideNavBarMenuId.ExceptionRequest)" [ngClass]="{ 'active': menuItemID===sideNavBarMenuId.ExceptionRequest }">
+    <a [routerLink]="['/ExceptionRequest']">
+      <i class="fa fa-fw"></i>Exception Request</a>
+  </li>
+  <li *ngIf="displayPTP" (click)="sideNavbarClick(sideNavBarMenuId.PTP)" [ngClass]="{ 'active': menuItemID===sideNavBarMenuId.PTP }">
+    <a [routerLink]="['/PTP']">
+      <i class="fa fa-fw"></i>PTP Team</a>
+  </li>
+  <li *ngIf="displayAdmin" (click)="sideNavbarClick(sideNavBarMenuId.Admin)" [ngClass]="{ 'active': menuItemID===sideNavBarMenuId.Admin }">
+    <a [routerLink]="['/Admin']">
+      <i class="fa fa-fw"></i>Admin</a>
+  </li>
+  <li (click)="sideNavbarClick(sideNavBarMenuId.SupportingDocuments)" [ngClass]="{ 'active': menuItemID===sideNavBarMenuId.SupportingDocuments }">
+    <a [routerLink]="['/SupportingDocuments']">
+      <i class="fa fa-fw"></i>Supporting Documents</a>
+  </li>
+</ul>

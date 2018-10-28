@@ -1,0 +1,30 @@
+<div class="form">
+  <ul class="list-group borderless">
+    <li class="list-group-item content-section">
+      <div class="content-section-row">
+        <mat-form-field>
+          <input matInput placeholder="合同备案请求所有者" [(ngModel)]="ownerEmail" [formControl]="emailFormControl" id="ownerEmail"
+            name="ownerEmail" required>
+          <mat-hint>Contract Filing Request Owner</mat-hint>
+          <mat-error *ngIf="emailFormControl.hasError('required')">
+            required
+          </mat-error>
+          <mat-error *ngIf="emailFormControl.hasError('email') && !emailFormControl.hasError('required')">
+            please enter a valid email address
+          </mat-error>
+        </mat-form-field>
+      </div>
+    </li>
+  </ul>
+  <div *ngIf="displayMessage">
+    {{message}}
+  </div>
+  <div class="button-section">
+    <div class="button-block">
+      <button (click)="onbtnChangeClick()" type="button">Change</button>
+    </div>
+    <div class="button-block">
+      <button (click)="onbtnCloseClick()" type="button">Close</button>
+    </div>
+  </div>
+</div>

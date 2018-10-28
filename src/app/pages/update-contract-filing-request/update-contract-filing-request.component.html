@@ -1,0 +1,548 @@
+<form class="form" #addContractFilingRequestForm="ngForm" (ngSubmit)="onformSubmit(); addContractFilingRequestForm.resetForm()">
+    <h4 class="content-section-header">合同备案情况 Contract Filing</h4>
+    <ul class="list-group borderless">
+        <li class="list-group-item content-section">
+            <div class="content-section-row">
+                <mat-form-field>
+                    <input matInput placeholder="合同编号" [(ngModel)]="request.colContractID" id="colContractID" name="colContractID"
+                        #colContractID="ngModel" required>
+                    <mat-hint>Contract Number</mat-hint>
+                    <mat-error *ngIf="colContractID.hasError('required')">
+                        required
+                    </mat-error>
+                </mat-form-field>
+            </div>
+        </li>
+    </ul>
+    <h4 class="content-section-header">发包方或劳务受让方情况 Contractor or Labor Assignee</h4>
+    <ul class="list-group borderless">
+        <li class="list-group-item content-section">
+            <div class="content-section-row">
+                <div class="content-section-left-column">
+                    <mat-form-field>
+                        <mat-select placeholder="公司代码" [(ngModel)]="request.colCompanyCode" id="colCompanyCode" name="colCompanyCode"
+                            #colCompanyCode="ngModel" (selectionChange)="onCompanyCodeChanged($event.value)" required>
+                            <mat-option *ngFor="let item of metadataCompanyInfo" value={{item.colCompanyCode}}>
+                                {{item.colCompanyCode}}
+                            </mat-option>
+                        </mat-select>
+                        <mat-hint>Company Code</mat-hint>
+                        <mat-error *ngIf="colCompanyCode.hasError('required')">
+                            required
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="content-section-right-column">
+                    <mat-form-field style="width:280px !important">
+                        <input matInput placeholder="公司名称" [(ngModel)]="request.colCompanyName" id="colCompanyName"
+                            name="colCompanyName" #colCompanyName="ngModel" required>
+                        <mat-hint>Company Name</mat-hint>
+                        <mat-error *ngIf="colCompanyName.hasError('required')">
+                            required
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="content-section-row">
+                <div class="content-section-left-column">
+                    <mat-form-field>
+                        <input matInput placeholder="联系人" [(ngModel)]="request.colContact" id="colContact" name="colContact"
+                            #colContact="ngModel" required>
+                        <mat-hint>The Contact</mat-hint>
+                        <mat-error *ngIf="colContact.hasError('required')">
+                            required
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="content-section-right-column">
+                    <mat-form-field>
+                        <input matInput placeholder="电话" [(ngModel)]="request.colPhone" id="colPhone" name="colPhone"
+                            #colPhone="ngModel" required>
+                        <mat-hint>Contact Number</mat-hint>
+                        <mat-error *ngIf="colPhone.hasError('required')">
+                            required
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="content-section-row">
+                <div class="content-section-left-column">
+                    <mat-form-field>
+                        <input matInput placeholder="传真" [(ngModel)]="request.colFax" id="colFax" name="colFax" #colFax="ngModel"
+                            required>
+                        <mat-hint>Fax</mat-hint>
+                        <mat-error *ngIf="colFax.hasError('required')">
+                            required
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+        </li>
+    </ul>
+    <h4 class="content-section-header">承包商或提供劳务方("非居民")情况 Contractor or Labor Provider "Non-Residents"</h4>
+    <ul class="list-group borderless">
+        <li class="list-group-item content-section">
+            <div class="content-section-row">
+                <div class="content-section-left-column">
+                    <mat-form-field>
+                        <mat-select placeholder="是否已经组织临时登记" (selectionChange)="oncolVendorRegistryStatusChanged($event.value)"
+                            [(ngModel)]="request.colVendorRegistryStatus" id="colVendorRegistryStatus" name="colVendorRegistryStatus"
+                            #colVendorRegistryStatus="ngModel" required>
+                            <mat-option value="是">是</mat-option>
+                            <mat-option value="否">否</mat-option>
+                        </mat-select>
+                        <mat-hint>Have Temporary Registration or not</mat-hint>
+                        <mat-error *ngIf="colVendorRegistryStatus.hasError('required')">
+                            required
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="content-section-right-column" *ngIf="request.colVendorRegistryStatus == '是'">
+                    <mat-form-field>
+                        <input matInput placeholder="纳税人识别号" [(ngModel)]="request.colVendorTaxPayerID" id="colVendorTaxPayerID"
+                            name="colVendorTaxPayerID" #colVendorTaxPayerID="ngModel" required>
+                        <mat-hint>Taxpayer's Identification Number</mat-hint>
+                        <mat-error *ngIf="colVendorTaxPayerID.hasError('required')">
+                            required
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="content-section-row">
+                <div class="content-section-left-column">
+                    <mat-form-field>
+                        <input matInput placeholder="名称(英文)" [(ngModel)]="request.colVendorTaxPayerNameEN" id="colVendorTaxPayerNameEN"
+                            name="colVendorTaxPayerNameEN" #colVendorTaxPayerNameEN="ngModel" required>
+                        <mat-hint>Company Name (In English)</mat-hint>
+                        <mat-error *ngIf="colVendorTaxPayerNameEN.hasError('required')">
+                            required
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="content-section-right-column">
+                    <mat-form-field>
+                        <input matInput placeholder="名称(中文)" [(ngModel)]="request.colVendorTaxPayerNameCN" id="colVendorTaxPayerNameCN"
+                            name="colVendorTaxPayerNameCN" #colVendorTaxPayerNameCN="ngModel" required>
+                        <mat-hint>Company Name (In Chinese)</mat-hint>
+                        <mat-error *ngIf="colVendorTaxPayerNameCN.hasError('required')">
+                            required
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="content-section-row">
+                <mat-form-field>
+                    <input matInput placeholder="非居民企业国家" [(ngModel)]="request.colVendorCompanyNationality" id="colVendorCompanyNationality"
+                        name="colVendorCompanyNationality" #colVendorCompanyNationality="ngModel" required>
+                    <mat-hint>Non-resident Enterprise Country</mat-hint>
+                    <mat-error *ngIf="colVendorCompanyNationality.hasError('required')">
+                        required
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="content-section-row">
+                <div class="content-section-left-column">
+                    <mat-form-field>
+                        <input matInput placeholder="地址(英文)" [(ngModel)]="request.colVendorCompanyAddressEN" id="colVendorCompanyAddressEN"
+                            name="colVendorCompanyAddressEN" #colVendorCompanyAddressEN="ngModel" required>
+                        <mat-hint>Company Address (In English)</mat-hint>
+                        <mat-error *ngIf="colVendorCompanyAddressEN.hasError('required')">
+                            required
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="content-section-right-column">
+                    <mat-form-field>
+                        <input matInput placeholder="地址(中文)" [(ngModel)]="request.colVendorCompanyAddressCN" id="colVendorCompanyAddressCN"
+                            name="colVendorCompanyAddressCN" #colVendorCompanyAddressCN="ngModel" required>
+                        <mat-hint>Company Address (In Chinese)</mat-hint>
+                        <mat-error *ngIf="colVendorCompanyAddressCN.hasError('required')">
+                            required
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="content-section-row">
+                <div class="content-section-left-column">
+                    <mat-form-field>
+                        <input matInput placeholder="开户银行名称" [(ngModel)]="request.colVendorBankName" id="colVendorBankName"
+                            name="colVendorBankName" #colVendorBankName="ngModel" required>
+                        <mat-hint>Bank of Deposit</mat-hint>
+                        <mat-error *ngIf="colVendorBankName.hasError('required')">
+                            required
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="content-section-right-column">
+                    <mat-form-field>
+                        <input matInput placeholder="账号" [(ngModel)]="request.colVendorBankAccount" id="colVendorBankAccount"
+                            name="colVendorBankAccount" #colVendorBankAccount="ngModel" required>
+                        <mat-hint>Bank Account</mat-hint>
+                        <mat-error *ngIf="colVendorBankAccount.hasError('required')">
+                            required
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="content-section-row">
+                <div class="content-section-left-column">
+                    <mat-form-field>
+                        <input matInput placeholder="联系人 (注: 可以是申请人)" [(ngModel)]="request.colVendorContact" id="colVendorContact"
+                            name="colVendorContact" #colVendorContact="ngModel" required>
+                        <mat-hint>The Contact (Note: Could be theApplicant)</mat-hint>
+                        <mat-error *ngIf="colVendorContact.hasError('required')">
+                            required
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="content-section-right-column">
+                    <mat-form-field>
+                        <input matInput placeholder="电话" [(ngModel)]="request.colVendorPhone" id="colVendorPhone" name="colVendorPhone"
+                            #colVendorPhone="ngModel" required>
+                        <mat-hint>Contact Number</mat-hint>
+                        <mat-error *ngIf="colVendorPhone.hasError('required')">
+                            required
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="content-section-row">
+                <mat-form-field>
+                    <input matInput placeholder="传真" [(ngModel)]="request.colVendorFax" id="colVendorFax" name="colVendorFax"
+                        #colVendorFax="ngModel" required>
+                    <mat-hint>Fax</mat-hint>
+                    <mat-error *ngIf="colVendorFax.hasError('required')">
+                        required
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="content-section-row">
+                <div class="content-section-left-column">
+                    <mat-form-field>
+                        <input matInput placeholder="纳税人名称" [(ngModel)]="request.colVendorTaxPayerName" id="colVendorTaxPayerName"
+                            name="colVendorTaxPayerName" #colVendorTaxPayerName="ngModel" required>
+                        <mat-hint>Name of Taxpayer</mat-hint>
+                        <mat-error *ngIf="colVendorTaxPayerName.hasError('required')">
+                            required
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="content-section-right-column">
+                    <mat-form-field>
+                        <input matInput placeholder="法定代表人" [(ngModel)]="request.colVendorCompanyOwnerName" id="colVendorCompanyOwnerName"
+                            name="colVendorCompanyOwnerName" #colVendorCompanyOwnerName="ngModel" required width="">
+                        <mat-hint>Legal Representative</mat-hint>
+                        <mat-error *ngIf="colVendorCompanyOwnerName.hasError('required')">
+                            required
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="content-section-row">
+                <div class="content-section-left-column">
+                    <mat-form-field>
+                        <input matInput placeholder="国籍 (注: 法定代表人)" [(ngModel)]="request.colVendorCompanyOwnerNationality"
+                            id="colVendorCompanyOwnerNationality" name="colVendorCompanyOwnerNationality"
+                            #colVendorCompanyOwnerNationality="ngModel" required>
+                        <mat-hint>Nationality (Note: Legal Representative)</mat-hint>
+                        <mat-error *ngIf="colVendorCompanyOwnerNationality.hasError('required')">
+                            required
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="content-section-right-column">
+                    <mat-form-field>
+                        <input matInput placeholder="财务负责人" [(ngModel)]="request.colVendorCompanyCFO" id="colVendorCompanyCFO"
+                            name="colVendorCompanyCFO" #colVendorCompanyCFO="ngModel" required>
+                        <mat-hint>Finance Chief</mat-hint>
+                        <mat-error *ngIf="colVendorCompanyCFO.hasError('required')">
+                            required
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+        </li>
+    </ul>
+    <h4 class="content-section-header">合同情况 Contract</h4>
+    <ul class="list-group borderless">
+        <li class="list-group-item content-section">
+            <div class="content-section-row">
+                <mat-form-field>
+                    <input matInput placeholder="项目名称" [(ngModel)]="request.colProjectName" id="colProjectName" name="colProjectName"
+                        #colProjectName="ngModel" required>
+                    <mat-hint>Project Name</mat-hint>
+                    <mat-error *ngIf="colProjectName.hasError('required')">
+                        required
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="checkbox form-font-color">
+                <h5>项目类型</h5>
+                <section>
+                    <mat-checkbox>承包工程</mat-checkbox>
+                    <mat-checkbox>修理修配</mat-checkbox>
+                    <mat-checkbox>交通运输</mat-checkbox>
+                    <mat-checkbox>仓储租赁</mat-checkbox>
+                    <mat-checkbox>咨询经纪</mat-checkbox>
+                    <mat-checkbox>文化体育</mat-checkbox>
+                    <mat-checkbox>技术服务</mat-checkbox>
+                    <mat-checkbox>教育培训</mat-checkbox>
+                    <mat-checkbox>设计</mat-checkbox>
+                    <mat-checkbox>娱乐</mat-checkbox>
+                    <mat-checkbox>旅游</mat-checkbox>
+                    <mat-checkbox>其他</mat-checkbox>
+                </section>
+            </div>
+            <div class="content-section-row">
+                <mat-form-field>
+                    <input matInput placeholder="合同名称" [(ngModel)]="request.colContractName" id="colContractName" name="colContractName"
+                        #colContractName="ngModel" required>
+                    <mat-hint>Contract Name</mat-hint>
+                    <mat-error *ngIf="colContractName.hasError('required')">
+                        required
+                    </mat-error>
+                </mat-form-field>
+            </div>
+            <div class="content-section-row">
+                <div class="content-section-left-column">
+                    <mat-form-field>
+                        <input matInput placeholder="作业或劳务地点" [(ngModel)]="request.colProjectLocation" id="colProjectLocation"
+                            name="colProjectLocation" #colProjectLocation="ngModel" required>
+                        <mat-hint>Location of Project or Labor</mat-hint>
+                        <mat-error *ngIf="colProjectLocation.hasError('required')">
+                            required
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="content-section-right-column">
+                    <mat-form-field>
+                        <input matInput placeholder="在华作业或劳务人数" [(ngModel)]="request.colWorkforceAmount" id="colWorkforceAmount"
+                            name="colWorkforceAmount" #colWorkforceAmount="ngModel" required>
+                        <mat-hint>Number of People Participating in Operation or Labor Project in China</mat-hint>
+                        <mat-error *ngIf="colWorkforceAmount.hasError('required')">
+                            required
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="content-section-row">
+                <div class="content-section-left-column">
+                    <mat-form-field>
+                        <input matInput placeholder="合同期限(天)" [(ngModel)]="request.colContractPeroid" id="colContractPeroid"
+                            name="colContractPeroid" #colContractPeroid="ngModel" required>
+                        <mat-hint>Term of Contract (Day)</mat-hint>
+                        <mat-error *ngIf="colContractPeroid.hasError('required')">
+                            required
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="content-section-right-column">
+                    <mat-form-field>
+                        <input matInput [matDatepicker]="signDatePicker" placeholder="签订合同日期" [(ngModel)]="request.colContractSignDate"
+                            id="colContractSignDate" name="colContractSignDate" #colContractSignDate="ngModel" required>
+                        <mat-datepicker-toggle matSuffix [for]="signDatePicker"></mat-datepicker-toggle>
+                        <mat-datepicker #signDatePicker></mat-datepicker>
+                        <mat-hint>Date of Signing Contract</mat-hint>
+                        <mat-error *ngIf="colContractSignDate.hasError('required')">
+                            required
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="content-section-row">
+                <div class="content-section-left-column">
+                    <mat-form-field>
+                        <input matInput [matDatepicker]="startDatePicker" placeholder="合同执行起始日期" [(ngModel)]="request.colContractStartDate"
+                            id="colContractStartDate" name="colContractStartDate" #colContractStartDate="ngModel"
+                            required>
+                        <mat-datepicker-toggle matSuffix [for]="startDatePicker"></mat-datepicker-toggle>
+                        <mat-datepicker #startDatePicker></mat-datepicker>
+                        <mat-hint>Start Date of Contract Execution</mat-hint>
+                        <mat-error *ngIf="colContractStartDate.hasError('required')">
+                            required
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="content-section-right-column">
+                    <mat-form-field>
+                        <input matInput [matDatepicker]="endDatePicker" placeholder="合同执行终止日期" [(ngModel)]="request.colContractEndDate"
+                            id="colContractEndDate" name="colContractEndDate" #colContractEndDate="ngModel" required>
+                        <mat-datepicker-toggle matSuffix [for]="endDatePicker"></mat-datepicker-toggle>
+                        <mat-datepicker #endDatePicker></mat-datepicker>
+                        <mat-hint>Date of Contract Termination</mat-hint>
+                        <mat-error *ngIf="colContractEndDate.hasError('required')">
+                            required
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="content-section-row">
+                <div class="content-section-left-column">
+                    <mat-form-field>
+                        <mat-select placeholder="是否开口合同" (selectionChange)="oncolOpenContractChanged($event.value)"
+                            [(ngModel)]="request.colOpenContract" id="colOpenContract" name="colOpenContract"
+                            #colOpenContract="ngModel" required>
+                            <mat-option value="是">是</mat-option>
+                            <mat-option value="否">否</mat-option>
+                        </mat-select>
+                        <mat-hint>Open-end Contract or not</mat-hint>
+                        <mat-error *ngIf="colOpenContract.hasError('required')">
+                            required
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="content-section-left-column" *ngIf="request.colOpenContract == '是'">
+                    <mat-form-field>
+                        <input matInput placeholder="付款次数" [(ngModel)]="request.colPaymentTimes" id="colPaymentTimes"
+                            name="colPaymentTimes" #colPaymentTimes="ngModel" required>
+                        <mat-hint>Payment times</mat-hint>
+                        <mat-error *ngIf="colPaymentTimes.hasError('required')">
+                            required
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="content-section-row">
+                <div class="content-section-left-column">
+                    <mat-form-field>
+                        <mat-select placeholder="合同金额是否含税" [(ngModel)]="request.colIncludeTax" id="colIncludeTax" name="colIncludeTax"
+                            #colIncludeTax="ngModel" required>
+                            <mat-option value="是">是</mat-option>
+                            <mat-option value="否">否</mat-option>
+                        </mat-select>
+                        <mat-hint>Contract Amount Including Tax or not</mat-hint>
+                        <mat-error *ngIf="colIncludeTax.hasError('required')">
+                            required
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="content-section-right-column">
+                    <mat-form-field>
+                        <mat-select matInput placeholder="合同币种" [(ngModel)]="request.colCurrency" id="colCurrency" name="colCurrency"
+                            #colCurrency="ngModel" required>
+                            <mat-option *ngFor="let item of metadataCurrency" value={{item.colCurrency}}>
+                                {{item.colCurrency}}
+                            </mat-option>
+                        </mat-select>
+                        <mat-hint>Currency</mat-hint>
+                        <mat-error *ngIf="colCurrency.hasError('required')">
+                            required
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="content-section-row">
+                <div class="content-section-left-column">
+                    <mat-form-field>
+                        <input matInput placeholder="合同金额" [(ngModel)]="request.colContractAmount" id="colContractAmount"
+                            name="colContractAmount" #colContractAmount="ngModel" required>
+                        <mat-hint>Contract Amount</mat-hint>
+                        <mat-error *ngIf="colContractAmount.hasError('required')">
+                            required
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+                <div class="content-section-right-column">
+                    <mat-form-field>
+                        <mat-select matInput placeholder="所得项目" [(ngModel)]="request.colOutput" id="colOutput" name="colOutput"
+                            #colOutput="ngModel" required>
+                            <mat-option *ngFor="let item of metadataProjectOutput" value={{item.colOutput}}>
+                                {{item.colOutput}}
+                            </mat-option>
+                        </mat-select>
+                        <mat-hint>Income Item</mat-hint>
+                        <mat-error *ngIf="colOutput.hasError('required')">
+                            required
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="content-section-row">
+                <mat-form-field>
+                    <mat-select matInput placeholder="协定所得项目" [(ngModel)]="request.colAgreedOutput" id="colAgreedOutput"
+                        name="colAgreedOutput" #colAgreedOutput="ngModel" required>
+                        <mat-option *ngFor="let item of metadataProjectAgreedOutput" value={{item.colAgreedOutput}}>
+                            {{item.colAgreedOutput}}
+                        </mat-option>
+                    </mat-select>
+                    <mat-hint>Accord Income Item</mat-hint>
+                    <mat-error *ngIf="colAgreedOutput.hasError('required')">
+                        required
+                    </mat-error>
+                </mat-form-field>
+            </div>
+        </li>
+    </ul>
+    <h4 class="content-section-header">备注 Note</h4>
+    <ul class="list-group borderless">
+        <li class="list-group-item content-section">
+            <div class="content-section-row content-section-textarea-row">
+                <mat-form-field class="textarea">
+                    <textarea matInput placeholder="备注1" [(ngModel)]="request.colComment1" id="colComment1" name="colComment1"
+                        #colComment1="ngModel"></textarea>
+                    <mat-hint>Note 1</mat-hint>
+                </mat-form-field>
+            </div>
+            <div class="content-section-row content-section-textarea-row">
+                <mat-form-field class="textarea">
+                    <textarea matInput placeholder="备注2" [(ngModel)]="request.colComment2" id="colComment2" name="colComment2"
+                        #colComment2="ngModel"></textarea>
+                    <mat-hint>Note 2</mat-hint>
+                </mat-form-field>
+            </div>
+            <div class="content-section-row content-section-textarea-row">
+                <mat-form-field class="textarea">
+                    <textarea matInput placeholder="备注3" [(ngModel)]="request.colComment3" id="colComment3" name="colComment3"
+                        #colComment3="ngModel"></textarea>
+                    <mat-hint>Note 3</mat-hint>
+                </mat-form-field>
+            </div>
+            <div class="content-section-row content-section-textarea-row">
+                <mat-form-field class="textarea">
+                    <textarea matInput placeholder="备注4" [(ngModel)]="request.colComment4" id="colComment4" name="colComment4"
+                        #colComment4="ngModel"></textarea>
+                    <mat-hint>Note 4</mat-hint>
+                </mat-form-field>
+            </div>
+            <div class="content-section-row content-section-textarea-row">
+                <mat-form-field class="textarea">
+                    <textarea matInput placeholder="备注5" [(ngModel)]="request.colComment5" id="colComment5" name="colComment5"
+                        #colComment5="ngModel"></textarea>
+                    <mat-hint>Note 5</mat-hint>
+                </mat-form-field>
+            </div>
+        </li>
+    </ul>
+    <h4 class="content-section-header">附件 Attachment</h4>
+    <ul class="list-group borderless">
+        <li class="list-group-item content-section">
+            <table>
+                <tbody>
+                    <tr>
+                        <input type="file" id="file" #fileUploader (change)="onFileInputChanged($event.target.files); fileUploader.value=''">
+                    </tr>
+                    <tr *ngFor="let item of fileList">
+                        <td>
+                            {{ item.name }} <a *ngIf="item.name != null" (click)="onbtnDeleteFileClick(item.name)">delete</a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </li>
+    </ul>
+    <div *ngIf="displayMessage">
+        {{message}}
+    </div>
+    <div class="button-section">
+        <div class="button-block">
+            <button (click)="onbtnSaveDraftClick()" type="button">Save Draft</button>
+        </div>
+        <div class="button-block">
+            <!-- <button type="submit" [disabled]="!addContractFilingRequestForm.valid">Submit</button> -->
+            <button type="submit">Submit</button>
+        </div>
+        <div class="button-block">
+            <button (click)="onbtnCloseClick()" type="button">Close</button>
+        </div>
+    </div>
+</form>

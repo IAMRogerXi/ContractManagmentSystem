@@ -1,0 +1,35 @@
+.form {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.content-section {
+    padding-left: 60px;
+    padding-bottom: 25px;
+}
+
+.content-section-row {
+    height: 70px;
+}
+
+.content-section-textarea-row {
+    height: 90px;
+}
+
+.button-section {
+    text-align: center;    
+}
+
+.button-block {
+    display: inline-block; 
+    width: 15%;
+}
+
+.form input {
+    border:none;
+}
+
+.textarea {
+    width: 300px;
+    padding: 0px;
+}

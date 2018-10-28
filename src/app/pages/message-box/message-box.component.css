@@ -1,0 +1,14 @@
+.message-box {
+    flex-direction: column;
+    display: flex;
+    padding-top: 6px;
+}
+
+.content-section {
+    text-align: center;
+}
+
+.button-section {
+    padding-top: 15px;
+    text-align: center;
+}
